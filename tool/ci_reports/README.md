@@ -1,3 +1,4 @@
+
 # Flutter CI reports
 
 既存のFlutterテストは変更せず、`testing_app/test` のUnit・Widgetテストを実行します。
@@ -12,7 +13,7 @@ Integration Testは端末・エミュレータを必要とするため、この�
 3. **Flutter Test Report** を手動実行、またはmainへのpush/PRで実行します。
 4. 実際の失敗が出たら同じRunの **Re-run failed jobs** を実行します。
    新規Runの成功は同じRunの再実行ではありません。失敗を人工的に埋め込みません。
-5. **Flutter CI Analysis** を手動実行します。main上では毎週月曜09:00 JSTにも動きます。
+5. **Flutter CI Analysis** を手動実行します。main上では毎時17分（1時間ごと）にも動きます。
 6. `flutter-ci-report-*` Artifactをダウンロードし、`report.html` を開きます。
 
 テストの失敗終了コードはpipefailで維持します。成功・失敗にかかわらずmachineイベントを
@@ -64,7 +65,7 @@ pub getやSDKセットアップ失敗はテスト失敗として数えません�
 複数の失敗後の成功は直近の失敗Attemptと対にします。キャンセル等は成功と扱いません。
 個別テストの過去ログ横断比較・Flaky率・自動再実行はこの基礎実装には含めません。
 
-週次Workflowは前回成功した同Workflowのmain上Artifactからhistory.jsonを復元して追加します。
+分析Workflowは前回成功した同Workflowのmain上Artifactからhistory.jsonを復元して追加します。
 継続実行される限り90日を超えた収集記録も引き継げますが、Artifact自体は永続保管ではありません。
 90日以上の中断、削除、保持設定変更に備えてhistory.jsonを外部へ定期保管してください。
 履歴がない場合は新規収集を開始します。実行済みデータ0件は「観測なし」であり「Flakyなし」ではありません。

@@ -13,7 +13,7 @@ Integration Testは端末・エミュレータを必要とするため、この�
 3. **Flutter Test Report** を手動実行、またはmainへのpush/PRで実行します。
 4. 実際の失敗が出たら同じRunの **Re-run failed jobs** を実行します。
    新規Runの成功は同じRunの再実行ではありません。失敗を人工的に埋め込みません。
-5. **Flutter CI Analysis** を手動実行します。main上では毎時17分（1時間ごと）にも動きます。
+5. **Flutter CI Analysis** を手動実行します。main上では毎時17分・47分（30分ごと）にも動きます。
 6. `flutter-ci-report-*` Artifactをダウンロードし、`report.html` を開きます。
 
 テストの失敗終了コードはpipefailで維持します。成功・失敗にかかわらずmachineイベントを

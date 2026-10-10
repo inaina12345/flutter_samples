@@ -1,0 +1,43 @@
+# Copyright 2026 The Flutter team. All rights reserved.
+# Use of this source code is governed by a BSD-style license in the LICENSE file.
+name: Flutter Test Report
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  testing-app:
+    name: testing_app (stable, ubuntu)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6
+        with:
+          distribution: zulu
+          java-version: '17'
+      - uses: subosito/flutter-action@e938fdf56512cc96ef2f93601a5a40bde3801046
+        with:
+          channel: stable
+      # testing_app uses resolution: workspace; resolve at the repository root.
+      - name: Resolve workspace dependencies
+        run: flutter pub get
+      - name: Run Flutter tests
+        working-directory: testing_app
+        shell: bash
+        run: |
+          mkdir -p ../build/ci-results
+          set -o pipefail
+          flutter test test --machine | tee ../build/ci-results/tests.jsonl
+      - name: Save test events for this attempt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: flutter-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: build/ci-results/tests.jsonl
+          if-no-files-found: warn
+          retention-days: 90

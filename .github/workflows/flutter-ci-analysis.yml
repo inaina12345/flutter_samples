@@ -3,6 +3,8 @@
 name: Flutter CI Analysis
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '37 * * * *' # Hourly, after the test workflow; default branch only.
 permissions:
   contents: read
   actions: read

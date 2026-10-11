@@ -1,4 +1,3 @@
-
 # Flutter CI reports
 
 既存のFlutterテストは変更せず、`testing_app/test` のUnit・Widgetテストを実行します。
@@ -10,10 +9,10 @@ Integration Testは端末・エミュレータを必要とするため、この�
 
 1. 2つの新規Workflowと `tool/ci_reports` をmainへ反映します。
 2. ForkのActionsが無効ならActionsタブで有効化します。
-3. **Flutter Test Report** を手動実行、またはmainへのpush/PRで実行します。
+3. **Flutter Test Report** を手動実行するか、mainへのpush/PRで実行します。
 4. 実際の失敗が出たら同じRunの **Re-run failed jobs** を実行します。
    新規Runの成功は同じRunの再実行ではありません。失敗を人工的に埋め込みません。
-5. **Flutter CI Analysis** を手動実行します。main上では毎時17分・47分（30分ごと）にも動きます。
+5. **Flutter CI Analysis** は手動実行できます。
 6. `flutter-ci-report-*` Artifactをダウンロードし、`report.html` を開きます。
 
 テストの失敗終了コードはpipefailで維持します。成功・失敗にかかわらずmachineイベントを

@@ -1,3 +1,4 @@
+
 # Copyright 2026 The Flutter team. All rights reserved.
 # Use of this source code is governed by a BSD-style license in the LICENSE file.
 name: Flutter Test Report
@@ -6,6 +7,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: '7 * * * *' # Hourly; default branch only.
   workflow_dispatch:
 permissions:
   contents: read
